@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<head>
+    <!------------------------------------------ BOOTSTRAP CSS ----------------------------------------->
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"-->
+    <!--          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <!------------------------------------------ CUSTOM CSS ----------------------------------------->
+    <link rel="stylesheet" type="text/css" href="/css/messages.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+
+    <!------------------------------------------ GOOGLE FONTS ----------------------------------------->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Fleur+De+Leah&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Belleza&display=swap" rel="stylesheet">
+    <!------------------------------------------ GOOGLE ICONS ----------------------------------------->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!------------------------------------------ JS ----------------------------------------->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Messages</title>
+</head>
+<body>
+<!------------------------------------------ NAVIGATION BAR ----------------------------------------->
+<div th:replace="fragments/commons :: navbar">
+    Navbar
+</div>
+
+
+<div class=" animated-border messages">
+    <h1 class="gold-text title">MESSAGES</h1>
+    <div class="container container-msg">
+        <div id="content">
+            <ul id="tabs" class="nav nav-tabs row justify-content-center" data-tabs="tabs">
+                <li class="active tab-msg gold-text col-md-2"><a href="#inbox" data-toggle="tab">
+                    <span class="material-icons">email</span>
+                    Inbox</a>
+                </li>
+                <li class="tab-msg gold-text col-md-2"><a href="#send" data-toggle="tab">
+                    <span class="material-icons">send</span>
+                    Send</a>
+                </li>
+            </ul>
+        </div>
+        <div id="my-tab-content" class="tab-content">
+            <div class="tab-pane active" id="inbox">
+                <h1>Inbox</h1>
+                <div th:if="${allInboxMessages}" class="empty-messages"> You don`t have any messages yet!</div>
+                <div th:each="message:${allInboxMessages}" th:object="${message}" class="msg-holder row">
+                    <div class="col-md-10">
+                        <h5 class="msg-title" th:text="|Message from *{user}|"></h5>
+                        <h6 class="date-msg" th:text="*{date}"></h6>
+                        <div th:text="*{body}"></div>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn-reply gold-text" type="button" data-toggle="modal"
+                                data-target="#modal-reply-" th:attrappend="data-target=${message.id}">
+                            <span class="material-icons gold-text">reply</span>Reply
+                        </button>
+                        <!--__________________________________MODAL_________________________________________-->
+                        <div class="modal fade " id="modal-reply-" th:attrappend="id=${message.id}" tabindex="-1"
+                             role="dialog">
+                            <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-danger modal-lg"
+                                 role="document">
+                                <div class="modal-content modal-msg-content">
+                                    <div class="modal-header">
+                                        <h4 class=" title-modal-msg gold-text" th:text="|REPLY TO *{user}|"></h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" class="white-text">&times;</span>
+                                        </button>
+                                    </div>
+                                    <hr>
+                                    <!------------------------------------------ FORM MODAL ----------------------------------------->
+                                    <form th:action="@{/supplier/messages/{recipient}(recipient=${message.user})}"
+                                          th:method="POST" th:object="${messageSendBindingModel}">
+                                        <script th:inline="javascript" th:if="${#fields.hasErrors()} and ${messageSendBindingModel.id}==${message.id}">
+                                            /*<![CDATA[*/
+                                            var idModal = /*[[${idModal}]]*/ 'default';
+                                            console.log(idModal);
+                                            /*]]>*/
+                                            $("#modal-reply-"+idModal).modal("show");
+                                        </script>
+                                        <div class="md-form md-outline">
+                                            <input type="hidden" name="id" th:value="${message.id}">
+                                            <label class="label-modal-msg" for="body">Message</label>
+                                            <textarea th:field="*{body}"
+                                                      th:errorclass="is-invalid"
+                                                      id="body"
+                                                      class="form-control textarea-modal-msg"
+                                                      required
+                                                      minlength="10" maxlength="500"
+                                                      cols="30" rows="10">
+                                                Message
+                                            </textarea>
+                                            <div th:errors="*{body}" class="invalid-feedback custom-error"></div>
+                                        </div>
+                                        <button type="submit" class="btn-modal-msg">Send message</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="tab-pane" id="send">
+                <h1>Send</h1>
+                <div th:if="${allSendMessages}" class="empty-messages"> You don`t have any messages yet!</div>
+                <div th:each="message:${allSendMessages}" th:object="${message}" class="msg-holder row">
+                    <div class="col-md-10">
+                        <h5 class="msg-title" th:text="|Message to *{user}|"></h5>
+                        <h6 class="date-msg" th:text="*{date}"></h6>
+                        <div th:text="*{body}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/commons :: footer"></div>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

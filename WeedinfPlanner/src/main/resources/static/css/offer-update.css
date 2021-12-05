@@ -1,0 +1,266 @@
+body {
+    background: linear-gradient(to right, rgba(250, 250, 210, 0.69), rgba(118, 183, 19, 0.18));
+}
+/*------------------------------------------------SIDEBAR-----------------------------------------------*/
+.container-sidebar{
+    margin-top: 3%;
+    margin-left: 3%;
+    font-family: 'Belleza', sans-serif;
+    background: url("/images/vertical-background.jpg");background-size: cover;
+    background-position: right;
+}
+
+.sidebar-widget{
+background: rgba(255, 255, 255, 0.7);
+    padding: 5%;
+    margin: 5%;
+}
+
+.sidebar-title{
+    font-size: 30px;
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 15%;
+    text-transform: uppercase;
+}
+
+.sidebar-h4{
+    text-align: center;
+}
+
+.sidebar-p{
+    text-align: center;
+}
+/*-------------------------------------------------MAIN UPDATE -----------------------------------------------*/
+.container-main{
+    margin: 2%;
+}
+
+.border-wrap {
+    position: relative;
+    background: -webkit-linear-gradient(top, rgba(226,186,120,1) 15%, rgba(163,126,67,1) 45%, rgba(145,112,59,1) 61%, rgba(213,173,109,1) 100%);
+    padding: 4px;
+    margin-top: 2%;
+}
+
+.pic-holder {
+
+}
+
+.btn-small {
+    color:  rgba(213,173,109,1) ;
+    background: white;
+    font-size: 16px;
+    line-height: 50px;
+    width: 50px;
+    height: 50px;
+    display: block;
+    transition: all 0.3s ease 0s;
+    border: double #bda886;
+}
+.btn-xs {
+    color:  rgba(213,173,109,1) ;
+    background: white;
+    font-size: 16px;
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    display: block;
+    transition: all 0.3s ease 0s;
+    border: none;
+}
+
+.btn-medium {
+    color:  rgba(213,173,109,1) ;
+    background: white;
+    font-size: 24px;
+    line-height: 50px;
+    width: 35%;
+    height: 70px;
+    transition: all 0.3s ease 0s;
+    border: double #bda886;
+    display: inline;
+    margin-top: 5%;
+}
+
+.btn-medium-update {
+    color:  rgba(213,173,109,1) ;
+    background: white;
+    font-size: 24px;
+    line-height: 50px;
+    width: 25%;
+    height: 70px;
+    transition: all 0.3s ease 0s;
+    border: double #bda886;
+    display: inline;
+}
+
+.button-update-wrapper{
+    justify-content: flex-end;
+}
+
+img{
+    max-width: 100%;
+    height: 150px;
+}
+
+.edit-container {
+    font-family: 'Belleza', sans-serif;
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    transition: all 0.3s ease 0s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 5%;
+    font-weight: bold;
+    background-color: white;
+    animation-name: stretch;
+    animation-duration: 500ms;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+    animation-delay: 0s;
+    animation-direction: alternate;
+    animation-fill-mode: none;
+    animation-play-state: running;
+}
+
+.edit-title {
+    color: black;
+    font-family: 'Belleza', sans-serif;
+    text-align: center;
+}
+
+@keyframes stretch {
+    0% {
+        transform: scale(.0);
+        border-radius: 50%;
+    }
+    100% {
+        transform: scale(1.0);
+    }
+}
+
+.offer-title {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.offer-title-hr {
+    height: 50px;
+    background: linear-gradient(right, rgba(0, 0, 0, 0), #76b713, rgba(0, 0, 0, 0));
+}
+.edit-title-hr {
+    height: 50px;
+    background: linear-gradient(right, rgba(0, 0, 0, 0), #090808, rgba(0, 0, 0, 0));
+}
+
+.button-edit {
+    background-color: rgba(213,173,109,1);
+    margin: 3%;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 28px;
+    padding: 6px;
+    width: 300px;
+    margin-left: 80%;
+}
+
+.button-edit:hover {
+    background-color: white;
+    color: rgba(213,173,109,1);
+    border-color: rgba(213,173,109,1);
+    border-style: solid;
+}
+
+
+
+label {
+    color: #000000;
+    font-size: 25px;
+    font-weight: 100;
+}
+
+/*border*/
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+
+/*________________________________________________MODAL ADD NEW PICTURE_______________________*/
+.modal-add-picture{
+    margin-top: 10%;
+    font-family: 'Belleza', sans-serif;
+}
+
+.add-picture-body{
+    text-align: center;
+}
+
+/*________________________________________________MODAL DELETE PICTURE_______________________*/
+.x-icon {
+    max-width: 10%;
+    height: 10%;
+}
+
+.modal-delete-picture {
+    max-width: 50%;
+    font-family: 'Belleza', sans-serif;
+}
+
+.modal-body-delete {
+    text-align: center;
+}
+
+.btn-delete-picture {
+    background-color: white;
+    font-size: 25px;
+    margin: 5% 40%;
+    border: double #bda886;
+    padding-left: 4%;
+    padding-right: 4%;
+    cursor: pointer;
+}
+
+.btn-delete-picture:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/*________________________________________________MODAL UPDATE OFFER_______________________*/
+.modal-update-offer {
+    font-family: 'Belleza', sans-serif;
+}
+
+.modal-box{
+    max-width: 60%;
+}
+
+.modal-general {
+    padding: 5%;
+    text-align: center;
+}
+
+.label-modal{
+    font-size: 23px;
+}
+
+.title-update-modal{
+    font-size: 40px;
+}
+
+input:invalid{
+    border-style: double;
+    border-color: #d00000;
+}
+input:valid{
+    border-style: double;
+    border-color: #0f9800;
+}
+textarea:invalid{
+    border-style: double;
+    border-color: #d00000;
+}
+textarea:valid{
+    border-style: double;
+    border-color: #0f9800;
+}

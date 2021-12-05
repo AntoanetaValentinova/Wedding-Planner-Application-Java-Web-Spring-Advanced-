@@ -1,0 +1,129 @@
+body{
+    font-family: 'Belleza', sans-serif;
+}
+
+/*<-----------------------------------------PROFILE INFO------------------------------------------*/
+.profile {
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-right: 10%;
+    padding-left: 10%;
+    padding-bottom: 3%;
+    background: white;
+    width: 90%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.btnEdit {
+    padding: 1%;
+    padding-right: 3%;
+    padding-left: 3%;
+    color: rgba(213,173,109,1);
+    border: rgba(213,173,109,1) double;
+    background: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.btnEdit:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.main-info {
+    display: block;
+    width: 100%;
+    margin-bottom: 3%;
+}
+
+
+.more-info {
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.property {
+    background: -webkit-linear-gradient(top, rgba(213,173,109,1) 0%, rgba(213,173,109,1) 26%, rgba(226,186,120,1) 35%, rgba(163,126,67,1) 45%, rgba(145,112,59,1) 61%, rgba(213,173,109,1) 100%);
+    -webkit-background-clip: text;
+    color: rgba(0, 0, 0, 0);
+    text-align: right;
+}
+
+/*<-----------------------------------------MODAL EDIT PROFILE------------------------------------------*/
+.modal-general {
+    font-family: 'Belleza', sans-serif;
+    margin-top: 10%;
+}
+
+.custom-content {
+    background-image: url("/images/background-14.jpg");
+    background-size: cover;
+    background-position: right;
+    text-align: center;
+}
+
+.title-modal {
+    text-align: center;
+    font-weight: 800;
+    font-size: 35px;
+    border:none;
+}
+
+.form-body{
+    background: #ffffffde;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 5%;
+}
+
+.modal-header {
+    border: none;
+}
+
+.form-label {
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.btn-edit-profile {
+    color: rgb(146 115 65);
+    background: #fff;
+    font-weight: 400;
+    width: 30%;
+    padding: 2%;
+    cursor: pointer;
+    float: none;
+    border: double rgb(146 115 65);
+    font-size: 20px;
+}
+
+.btn-edit-profile:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+input:invalid{
+    border-style: double;
+    border-color: #d00000;
+}
+input:valid{
+    border-style: double;
+    border-color: #0f9800;
+}
+
+@media screen and (max-width: 990px) {
+        .property{
+            text-align: center;
+            margin-top: 2%;
+        }
+    .value{
+        text-align: center;
+    }
+
+}

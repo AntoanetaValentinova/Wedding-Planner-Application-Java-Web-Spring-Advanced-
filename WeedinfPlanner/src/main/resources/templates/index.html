@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<head>
+    <!------------------------------------------ JS ----------------------------------------->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <!------------------------------------------ BOOTSTRAP CSS ----------------------------------------->
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"-->
+    <!--          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <!------------------------------------------ CUSTOM CSS ----------------------------------------->
+    <link rel="stylesheet" type="text/css" href="/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+    <!------------------------------------------ GOOGLE FONTS ----------------------------------------->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belleza&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Fleur+De+Leah&display=swap" rel="stylesheet">
+    <!------------------------------------------ GOOGLE ICONS ----------------------------------------->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+</head>
+<body>
+<!------------------------------------------ NAVIGATION BAR ----------------------------------------->
+<div th:replace="fragments/commons :: navbar">
+    Navbar
+</div>
+
+    <div class="container-main">
+        <img src="/images/background-12.jpg" class="background-greeting">
+        <div class="greeting">
+        <h1 class="title-main gold-text">Welcome to your Wedding Planner!</h1>
+        <p class="info-main"> Lets see what we have for you - scroll and learn more about us.</p>
+        <p class="info-main"> Enjoy!</p>
+        </div>
+    </div>
+    <div class="container-info">
+        <h1 class="ci-title gold-text">Why to join?</h1>
+        <div class="row">
+            <div class="col-md-4 ci-main-info-holder">
+                <div class="gold-text ci-info-title">Manage your upcoming tasks</div>
+                <div class="ci-info-description">As a user you will get a full list of upcoming tasks.
+                    Our team of wedding experts are sure that this checklist will ensure you effective way to manage your tasks
+                    - you will not to miss a thing! You can of course add your own tasks and delete ours initial suggestions. It`s all up to you!
+                </div>
+            </div>
+            <div class="col-md-8">
+                <img src="/images/checklist-2.png" alt="" class="checklist-img">
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-8">
+                <img src="/images/budget-2.png" alt="" class="checklist-img">
+            </div>
+            <div class="col-md-4 ci-main-info-holder">
+                <div class="gold-text ci-info-title">Manage your budget and expenses</div>
+                <div class="ci-info-description">And again within your registration you will get a full list of the most common expenses.
+                    You can add new expenses to your budget, to update the prices of our initial suggested expenses or delete them.
+                    And all of this operations will affect your budget so you can avoid the annoying calculations. How cool is that?
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-4 ci-main-info-holder">
+                <div class="gold-text ci-info-title">Manage your guest list</div>
+                <div class="ci-info-description">Yes, you get it right! We take care of that not simple task too.
+                    You can add guests and easily update their info ,
+                    like email, phone, attendance, etc.
+                </div>
+            </div>
+            <div class="col-md-8">
+                <img src="/images/guests-2.png" alt="" class="checklist-img">
+            </div>
+        </div>
+    </div>
+<div class="category-holder" id="venues-holder">
+    <h1 class="gold-text title-offers">Some of our offers</h1>
+    <div id="venues-container">
+        <h3 class="category-title">VENUES</h3>
+    </div>
+    <div id="photographers-container">
+        <h3 class="category-title">PHOTOGRAPHERS</h3>
+    </div>
+    <div id="music-container">
+        <h3 class="category-title">MUSIC</h3>
+    </div>
+    <a href="/offers" class="btl-all">View all</a>
+</div>
+
+<div th:replace="fragments/commons :: footer"></div>
+<script src="/js/main.js"></script>
+<script src="/js/home.js"></script>
+</body>
+</html>

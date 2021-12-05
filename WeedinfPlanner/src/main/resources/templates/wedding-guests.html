@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<head>
+    <!------------------------------------------ JS ----------------------------------------->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <!------------------------------------------ BOOTSTRAP CSS ----------------------------------------->
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"-->
+    <!--          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <!------------------------------------------ CUSTOM CSS ----------------------------------------->
+    <link rel="stylesheet" type="text/css" href="/css/wedding-guests.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+    <!------------------------------------------ GOOGLE FONTS ----------------------------------------->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belleza&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Fleur+De+Leah&display=swap" rel="stylesheet">
+    <!------------------------------------------ GOOGLE ICONS ----------------------------------------->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wedding guests</title>
+</head>
+<body>
+<!------------------------------------------ NAVIGATION BAR ----------------------------------------->
+<div th:replace="fragments/commons :: navbar">
+    Navbar
+</div>
+
+<div class="animated-border guests-container">
+    <div class="row justify-content-center">
+        <div class="col-md-4 col-4 card-guests">
+            <div class="row">
+                <div class="col-md-6">
+                    <image class="image-icon" src="/images/icons/attending.png"></image>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="gold-text card-guest-title">GUESTS</h3>
+                    <h3 th:text="${allAttending}"></h3>
+                    <h6>people of your guest list accepted your invitation</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-4 card-guests">
+            <div class="row">
+                <div class="col-md-6">
+                    <image class="image-icon" src="/images/icons/pending.png"></image>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="gold-text card-guest-title">PENDING</h3>
+                    <h3 th:text="${allPending}"></h3>
+                    <h6>people are not respond yet</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-4 card-guests">
+            <div class="row">
+                <div class="col-md-6">
+                    <image class="image-icon" src="/images/icons/declined.png"></image>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="gold-text card-guest-title">DECLINED</h3>
+                    <h3 th:text="${allDeclined}"></h3>
+                    <h6>declined</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="animated-border guest-list-container">
+    <div class="row main-guests justify-content-center">
+        <div class="col-md-4 gold-text div-name"
+             th:text="|${brideAndGroomInfo.firstName} ${brideAndGroomInfo.lastName}|">
+        </div>
+        <div class="col-md-4">
+            <img class="img-couple" src="/images/gold-couple.png" alt="">
+        </div>
+        <div th:if="${brideAndGroomInfo.partnerFirstName}==null and ${brideAndGroomInfo.partnerLastName}==null"
+             class="col-md-4">
+            <button class="gold-text btn-add-partner" data-toggle="modal" data-target="#modal-add-partner">
+                ADD
+            </button>
+            <p class="p">You haven`t add your partner names yet. You can do it by clicking the button.</p>
+        </div>
+        <div th:if="${brideAndGroomInfo.partnerFirstName}!=null and ${brideAndGroomInfo.partnerLastName}!=null"
+             class="col-md-4 gold-text div-name"
+             th:text="|${brideAndGroomInfo.partnerFirstName} ${brideAndGroomInfo.partnerLastName}|">
+        </div>
+        <hr>
+    </div>
+    <div class="add justify-content-end">
+        <p class="button-info p">You can easily add new expense through the button below.</p>
+        <button type="button" class="btn-modal gold-text" data-toggle="modal" data-target="#modal-add-guest">ADD GUEST</button>
+    </div>
+    <div class="row tr">
+        <h5 class="col-md-2  col-3 gold-text"> First name </h5>
+        <h5 class="col-md-2 col-3 gold-text"> Last name</h5>
+        <h5 class="col-md-3 col-3 gold-text">Attendance</h5>
+        <h5 class="col-md-2 col-2 gold-text">Type</h5>
+        <div class="col-md-1 gold-text"></div>
+        <div class="col-md-1 gold-text"></div>
+    </div>
+    <ul>
+        <li>
+            <div class="row guest-item" th:each="guest : ${allGuests}" th:object="${guest}">
+                <h4 class="col-md-2 col-2" th:text="*{firstName}"></h4>
+                <h4 class="col-md-2 col-2" th:text="*{lastName}"></h4>
+                <div class="col-md-3 col-3">
+                    <div class="row">
+                        <image class="small-icon col-md-2" th:src="'/images/icons/'+*{attend} +'.png'"></image>
+                        <h4 class="col-md-10" th:text="*{attend}"></h4>
+                    </div>
+                </div>
+                <h4 class="col-md-2 col-2" th:text="*{type}"></h4>
+                <button class="col-md-1 col-1 btn-guest " id="btn-view-guest" type="button" data-toggle="modal"
+                        data-target="#modal-view-guest" th:attrappend="data-target=${guest.id}">
+                    <span class="material-icons gold-text">visibility</span>
+                </button>
+
+                <!-- _________________________________________MODAL VIEW DETAIL INFO GUEST________________________________________-->
+                <div class="modal fade right " id="modal-view-guest" tabindex="-1" role="dialog"
+                     th:attrappend="id=${guest.id}">
+                    <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-danger" role="document">
+                        <div class="modal-content modal-view-guest">
+                            <div class="modal-header modal-header-view">
+                                <h4 class="title-modal-view gold-text">GUEST DETAILS</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" class="white-text">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body modal-body-view">
+                                <hr>
+                                <div class="row">
+                                    <h4 class="col-md-6 col-6 modal-prop">First name</h4>
+                                    <h4 class="col-md-6 col-6 modal-val" th:text="*{firstName}"></h4>
+                                </div>
+                                <div class="row">
+                                    <h4 class="col-md-6 col-6 modal-prop">Last name</h4>
+                                    <h4 class="col-md-6 col-6 modal-val" th:text="*{lastName}"></h4>
+                                </div>
+                                <div class="row">
+                                    <h4 class="col-md-6 col-6 modal-prop">Attendance</h4>
+                                    <div class="col-md-6 col-6 ">
+                                        <div class="row">
+                                            <image class="small-icon-modal col-md-1"
+                                                   th:src="'/images/icons/'+*{attend} +'.png'"></image>
+                                            <h4 class="col-md-9" th:text="*{attend}"></h4>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <h4 class="col-md-6 col-6 modal-prop">Email</h4>
+                                    <h4 class="col-md-6 col-6 modal-val" th:text="*{email}"></h4>
+                                </div>
+                                <div class="row">
+                                    <h4 class="col-md-6 col-6 modal-prop">Phone number</h4>
+                                    <h4 class="col-md-6 col-6 modal-val" th:text="*{phoneNumber}"></h4>
+                                </div>
+                                <div class="row">
+                                    <h4 class="col-md-6 col-6 modal-prop">Age</h4>
+                                    <h4 class="col-md-6 col-6 modal-val" th:text="*{age}"></h4>
+                                </div>
+                                <div class="row">
+                                    <h4 class="col-md-6 col-6 modal-prop">Type guest</h4>
+                                    <h4 class="col-md-6 col-6 modal-val" th:text="*{type}"></h4>
+                                </div>
+                                <div class="row">
+                                    <h4 class="col-md-6 col-6 modal-prop">Need hotel?</h4>
+                                    <h4 class="col-md-6 col-6 modal-val" th:if="*{needHotel}==true"> Yes </h4>
+                                    <h4 class="col-md-6 col-6 modal-val" th:if="*{needHotel}==false"> No </h4>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a th:href="@{/wedding-guests/{id}(id=${guest.id})}" class="a-button">
+                    <button class="btn-update-guest" type="button">
+                        <span class="material-icons gold-text">edit</span>
+                    </button>
+                </a>
+                <button class="col-md-1 btn-guest" id="btn-delete-guest" type="button" data-toggle="modal"
+                        data-target="#modal-delete-guest" th:attrappend="data-target=${guest.id}">
+                    <span class="material-icons gold-text">delete</span>
+                </button>
+<!--                __________________________________MODAL DELETE GUEST____________________________________________________-->
+                <div class="modal fade right " id="modal-delete-guest" tabindex="-1" role="dialog"
+                     th:attrappend="id=${guest.id}">
+                    <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-danger modal-delete" role="document">
+                        <div class="modal-content ">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" class="white-text">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body modal-body-delete">
+                             <h4 >ARE YOU SURE YOU WANT TO DELETE GUEST</h4>
+                             <h4 class="gold-text" th:text="|*{firstName} *{lastName}|"></h4>
+                                <img  class="x-icon" src="/images/delete.png" alt="">
+                                <form th:action="@{/wedding-guests/{id}(id=${guest.id})}" th:method="DELETE">
+                                    <button class="btn-delete-task" type="submit">DELETE</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </li>
+    </ul>
+
+
+
+    <!--________________________________________MODAL ADD PARTNER NAMES___________________________________________________________________-->
+    <div class="modal  modal-general" id="modal-add-partner" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-danger" role="document">
+            <div class="modal-content custom-content">
+                <div class="modal-header">
+                    <h4 class="title-modal gold-text">ADD YOUR PARTNER NAMES</h4>
+                    <hr>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">&times;</span>
+                    </button>
+                </div>
+                <!------------------------------------------ FORM MODAL ----------------------------------------->
+                <form class="modal-body" th:action="@{/wedding-guests/add-partner}" th:method="patch"
+                      th:object="${partnerNamesAddBindingModel}">
+                    <script th:inline="javascript" th:if="${hasErrors}">$("#modal-add-partner").modal("show");</script>
+                    <div class="col-md-12 form-group">
+                        <label for="partnerFirstName" class="form-label ">Partner first name</label>
+                        <input th:value="*{partnerFirstName}"
+                               th:errorclass="is-invalid"
+                               name="partnerFirstName"
+                               type="text"
+                               required
+                               minlength="2" maxlength="25"
+                               id="partnerFirstName"
+                               class="form-control">
+                        <div th:errors="*{partnerFirstName}" class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <label for="partnerLastName" class="form-label ">Partner last name</label>
+                        <input th:value="*{partnerLastName}"
+                               th:errorclass="is-invalid"
+                               name="partnerLastName"
+                               type="text"
+                               id="partnerLastName"
+                               required
+                               minlength="2" maxlength="25"
+                               class="form-control">
+                        <div th:errors="*{partnerLastName}" class="invalid-feedback"></div>
+                    </div>
+                    <button class="btn-add-partner" id="btn-add-partner-post" type="submit">ADD</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!--__________________________________MODAL ADD GUEST__________________________________________-->
+    <div class="modal fade modal-general-add" id="modal-add-guest" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-danger modal-lg" role="document">
+            <div class="modal-content modal-add-guest-content">
+                <div class="modal-header">
+                    <h4 class="title-modal-add gold-text">ADD NEW GUEST</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">&times;</span>
+                    </button>
+                </div>
+                <hr>
+                <!------------------------------------------ FORM MODAL ----------------------------------------->
+                <form class="modal-body row" th:action="@{/wedding-guests}"
+                      th:method="post"
+                      th:object="${guestAddBindingModel}">
+                    <script th:inline="javascript" th:if="${hasErrorsAddGuest}">$("#modal-add-guest").modal("show");</script>
+                    <div class="col-md-6 form-group">
+                        <label class="form-label">Attend status</label>
+                        <select th:errorclass="is-invalid" name="attend" class="form-control">
+                            <option class="hidden" selected disabled>Please, select attend status</option>
+                            <option th:each="attend: ${attendSt}"
+                                    th:text="${attend.name()}"
+                                    th:value="${attend.name()}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="firstName" class="form-label ">First name</label>
+                        <input th:field="*{firstName}"
+                               th:errorclass="is-invalid"
+                               type="text"
+                               id="firstName"
+                               required
+                               minlength="2" maxlength="25"
+                               class="form-control">
+                        <div th:errors="*{firstName}" class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="lastName" class="form-label ">Last name</label>
+                        <input th:field="*{lastName}"
+                               th:errorclass="is-invalid"
+                               type="text"
+                               id="lastName"
+                               required
+                               minlength="2" maxlength="25"
+                               class="form-control">
+                        <div th:errors="*{lastName}" class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="phoneNumber" class="form-label ">Phone number</label>
+                        <input th:field="*{phoneNumber}"
+                               th:errorclass="is-invalid"
+                               type="text"
+                               id="phoneNumber"
+                               class="form-control">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="email" class="form-label ">Email</label>
+                        <input th:field="*{email}"
+                               th:errorclass="is-invalid"
+                               type="email"
+                               id="email"
+                               class="form-control">
+                        <div th:errors="*{email}" class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="form-label">Age</label>
+                        <select th:errorclass="is-invalid" name="age" class="form-control">
+                            <option class="hidden" selected disabled>Please, select age range</option>
+                            <option th:each="ageRange: ${ageRanges}"
+                                    th:text="${ageRange.name()}"
+                                    th:value="${ageRange.name()}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="form-label">Type guest</label>
+                        <select th:errorclass="is-invalid" name="type" class="form-control">
+                            <option class="hidden" selected disabled>Please, select age range</option>
+                            <option th:each="type: ${types}"
+                                    th:text="${type.name()}"
+                                    th:value="${type.name()}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <h4 class="row checkbox-label">Need hotel?</h4>
+                        <div class="row checkbox-inputs">
+                            <div class="form-check">
+                                <input value="true" class="form-check-input" type="radio" name="needHotel"
+                                       id="needHotel">
+                                <label class="form-check-label" for="needHotel">
+                                    Yes
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input value="false" class="form-check-input" type="radio" name="needHotel"
+                                       id="needHotel2"
+                                       checked>
+                                <label class="form-check-label" for="needHotel2">
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-add-guest" id="btn-add-guest-post" type="submit">ADD</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/commons :: footer"></div>
+    <script src="/js/main.js"></script>
+</body>
+</html>

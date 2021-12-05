@@ -1,0 +1,260 @@
+body{
+    font-family: 'Belleza', sans-serif;
+}
+
+.background-greeting{
+    width: 100%;
+    height: 600px;
+    position: relative;
+    object-fit: cover;
+    /*filter: blur(2px);*/
+}
+
+.greeting{
+    position: absolute;
+    top: 350px;
+    background: #ffffff9e;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    text-align: center;
+    padding: 2%;
+}
+
+.main-title{
+    font-size: 34px;
+    text-shadow: 0px 0px 7px #0000007d;
+    font-weight: 500;
+}
+
+.info-main{
+    font-size: 23px;
+}
+
+.container-info{
+    background: white;
+    margin-top: 3%;
+}
+
+.ci-title{
+    text-align: center;
+    padding-top: 3%;
+    margin-bottom: 3%;
+}
+
+.ci-info-title{
+    font-size: 26px;
+    margin-top: 10%;
+    margin-bottom: 2%;
+}
+
+.ci-main-info-holder{
+    text-align: center;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.ci-info-description{
+    font-size: 22px;
+}
+
+.checklist-img{
+    width: 95%;
+    margin: 2% 5%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+/*---------------------------------------------OFFERS-------------------------------------------*/
+.category-holder{
+    background: white;
+    /* background-size: cover; */
+    margin-top: 3%;
+    text-align: center;
+}
+
+.category-title{
+    margin: 2% 0%;
+}
+
+.title-offers{
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.offer-grid {
+    font-family: 'Belleza', sans-serif;
+    text-align: center;
+    display: inline-block;
+    margin: 1%;
+    padding: 0;
+    transition: all 0.3s ease 0s;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes stretch {
+    0% {
+        transform: scale(.2);
+        border-radius: 100%;
+    }
+    100% {
+        transform: scale(1.0);
+    }
+}
+
+.offer-grid {
+    animation-name: stretch;
+    animation-duration: 600ms;
+    animation-timing-function: ease-out;
+    animation-delay: 0s;
+    animation-direction: alternate;
+    animation-fill-mode: none;
+    animation-play-state: running;
+    animation-iteration-count: 1;
+}
+
+
+
+.offer-image {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 10vw;
+    object-fit: cover;
+}
+
+.offer-image a.image {
+    display: block;
+}
+
+.offer-image img {
+    width: 100%;
+    height: auto;
+}
+
+.offer-links {
+    width: 50px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    transition: all 0.4s ease;
+}
+
+.offer-grid:hover .offer-links {
+    opacity: 1;
+}
+
+.offer-links li {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transform: translateX(-50px);
+    filter: blur(5px);
+    transition: all 0.4s ease 0s;
+}
+
+.offer-links li:nth-child(even) {
+    transform: translateX(50px);
+}
+
+.offer-grid:hover .offer-links li {
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+.offer-links li a,button {
+    color:  rgba(213,173,109,1) ;
+    background: white;
+    font-size: 16px;
+    line-height: 50px;
+    width: 50px;
+    height: 50px;
+    display: block;
+    transition: all 0.3s ease 0s;
+}
+
+.offer-grid .offer-links li a:hover {
+    color: #fff;
+    background:  rgba(213,173,109,1) ;
+}
+
+.offer-grid .offer-content {
+    background-color: white;
+    font-family: 'Belleza', sans-serif;
+    padding: 15px 10px 3px;
+}
+
+.offer-title {
+    font-size: 16px;
+    font-weight: 400;
+    height: 55px;
+    color: black;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+}
+
+.offer-title:hover {
+    color: rgba(213,173,109,1);
+    font-family: 'Playfair Display', serif;
+    position: relative;
+}
+
+.offer-title a {
+    color: #222;
+    transition: all 0.3s ease 0s;
+}
+
+.offer-grid .price-text {
+    color: #222;;
+    font-size: 22px;
+    font-weight: 300;
+    text-align: right;
+    width: calc(100% - 55px);
+    display: inline-block;
+}
+
+.offer-grid .price {
+    font-size: 22px;
+    font-weight: 700;
+    text-align: right;
+    width: calc(100% - 55px);
+    display: inline-block;
+}
+
+.offer-grid .price span {
+    color: #999;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: line-through;
+}
+
+.btl-all{
+    color: #ae884c;
+    font-size: 30px;
+    border-color: #ae884c;
+    border-style: double;
+    padding: 0% 2%;
+}
+
+@media screen and (max-width: 990px) {
+    .offer-grid {
+        margin: 0 0 30px;
+    }
+
+    .offer-image{
+        height: auto;
+    }
+
+    .greeting{
+        top: 600px;
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        padding: 2%;
+    }
+
+}

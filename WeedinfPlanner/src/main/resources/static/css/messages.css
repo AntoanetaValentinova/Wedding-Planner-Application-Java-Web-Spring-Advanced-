@@ -1,0 +1,102 @@
+.messages{
+    font-family: 'Belleza', sans-serif;
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-right: 10%;
+    padding-left: 10%;
+    padding-bottom: 3%;
+    background: white;
+    width: 90%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+    text-align: center;
+    padding-top: 3%;
+}
+
+.empty-messages{
+    text-align: center;
+    font-size: 22px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.tab-msg{
+    margin: 0 5%;
+    text-align: center;
+    font-size: 30px;
+}
+
+.tab-msg:active{
+    background: #757575;
+}
+
+.container-msg{
+
+}
+
+.msg-holder{
+    margin: 2%;
+    border: double;
+    border-color: #b59056;
+    padding: 2%;
+}
+
+.msg-title{
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: #b59056;
+}
+
+.btn-reply{
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    background: none;
+    font-size: 25px;
+}
+
+
+
+/*-----------------------------------------------MODAL MESSAGE-----------------------------------------------------*/
+.modal-msg-content{
+    margin-top: 30%;
+}
+
+.title-modal-msg{
+    font-size: 30px;
+    border: none;
+}
+
+.label-modal-msg{
+    text-align: center;
+    display: block;
+    font-size: 25px;
+}
+
+.textarea-modal-msg{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    width: 90%;
+}
+
+.btn-modal-msg{
+    display: block;
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-bottom: 5%;
+    font-size: 25px;
+    background: white;
+    border: double;
+    border-color: #b7945f;
+    color: #b7945f;
+}
+
+.custom-error{
+    margin: 5%;
+    font-size: 20px;
+}

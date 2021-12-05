@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<head>
+    <!------------------------------------------ JS ----------------------------------------->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <!------------------------------------------ BOOTSTRAP CSS ----------------------------------------->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <script type="text/javascript"
+            src="https://www.gstatic.com/charts/loader.js"></script>
+    <!------------------------------------------ CUSTOM CSS ----------------------------------------->
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/admin.css"/>
+    <!------------------------------------------ GOOGLE FONTS ----------------------------------------->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belleza&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Fleur+De+Leah&display=swap" rel="stylesheet">
+    <!------------------------------------------ GOOGLE ICONS ----------------------------------------->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Statistics</title>
+</head>
+<body>
+<!------------------------------------------ NAVIGATION BAR ----------------------------------------->
+<header th:replace="fragments/commons :: navbar">
+    Navbar
+</header>
+
+<div class="row">
+    <div class="admin container col">
+        <div class="row container-statistic">
+            <h1 class="title gold-text">STATISTICS</h1>
+            <div class="container-requests">
+                <h2 class="title-container gold-text">Requests</h2>
+                <div class="row justify-content-center">
+                    <div class="col-md-5 justify-content-center">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img class="image-requests" src="/images/icons/anonymous.png" alt="">
+                            </div>
+                            <div class="col-md-6 text-request" th:text="${statistic.anonymousRequests} + ' anonymous requests'"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 justify-content-center">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img class="image-requests" src="/images/icons/user.png" alt="">
+                            </div>
+                            <div class="col-md-6 text-request" th:text="${statistic.authenticatedRequests} + ' authenticated requests'"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="container-views">
+                <h2 class="title-container gold-text">Pages views count</h2>
+                <div class="row justify-content-center">
+                    <div id="chart_div"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/commons :: footer"></div>
+
+<script th:inline="javascript">
+    var real_data = /*[[${chartData}]]*/'noValue';
+    $(document).ready(function() {
+        google.charts.load('current', {
+            packages : [ 'corechart', 'bar' ]
+        });
+        google.charts.setOnLoadCallback(drawColumnChart);
+        // google.charts.setOnLoadCallback(drawPieChart);
+    });
+    function drawColumnChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Page');
+        data.addColumn('number', 'Views');
+        Object.keys(real_data).forEach(function(key) {
+            data.addRow([ key, real_data[key] ]);
+        });
+        var options = {
+            title : 'Pages count views',
+            hAxis : {
+                title : 'Page',
+            },
+            vAxis : {
+                title : 'View Count'
+            }
+        };
+        var chart = new google.visualization.ColumnChart(document
+            .getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+    // function drawPieChart() {
+    //     var data = new google.visualization.DataTable();
+    //     data.addColumn('string', 'Year');
+    //     data.addColumn('number', 'Views');
+    //     Object.keys(real_data).forEach(function(key) {
+    //         data.addRow([ key, real_data[key] ]);
+    //     });
+    //     var options = {
+    //         title : 'Blog stats'
+    //     };
+    //     var chart = new google.visualization.PieChart(document
+    //         .getElementById('piechart'));
+    //     chart.draw(data, options);
+    // }
+</script>
+<script src="/js/main.js"></script>
+</body>
+</html>

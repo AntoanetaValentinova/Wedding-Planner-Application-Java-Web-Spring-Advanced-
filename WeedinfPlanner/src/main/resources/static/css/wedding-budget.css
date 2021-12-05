@@ -1,0 +1,335 @@
+/*------------------------------------------------EXPENSES-------------------------------------------*/
+.error {
+    color: #c42b2b;
+    font-size: 18px;
+}
+
+.custom-error{
+    width:100%;
+    margin-top:.25rem;
+    font-size:80%;
+    color:#dc3545;
+}
+
+.invalid-input {
+    border-color: #dc3545  !important;
+}
+
+.expenses-container {
+    margin-top: 40px;
+    margin-left: 3%;
+    padding-top: 3%;
+    padding-right: 2%;
+    padding-left: 2%;
+    padding-bottom: 10%;
+    background: white;
+    width: 90%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    font-family: 'Belleza', sans-serif;
+    font-size: 25px;
+}
+
+.expenses-title {
+    text-align: center;
+}
+
+.input-checkbox{ display: none; }
+
+.input-checkbox + .label-checkbox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 3%;
+    color: black;
+    cursor: pointer;
+}
+
+.input-checkbox + .label-checkbox:before {
+    content: '';
+    display: block;
+    width: 25px;
+    height: 25px;
+    border: 2px solid rgba(163,126,67,1);
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: .6;
+    -webkit-transition: all .12s, border-color .08s;
+    transition: all .12s, border-color .08s;
+}
+
+.input-checkbox:checked + .label-checkbox:before {
+    width: 10px;
+    top: -5px;
+    left: 5px;
+    opacity: 1;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.input-checkbox:checked + .label-checkbox {
+    text-decoration: line-through;
+    text-decoration-color: rgba(163,126,67,1);
+}
+
+
+
+.icon-div {
+    background: linear-gradient(to right,rgba(213,173,109,1) 0%, rgba(213,173,109,1) 26%, rgba(226,186,120,1) 35%, rgba(163,126,67,1) 45%, rgba(145,112,59,1) 61%, rgba(213,173,109,1) 100%);
+    color: #fff;
+    padding-left: 3%;
+}
+
+.arrow {
+    font-size: 40px;
+    font-weight: 900;
+}
+
+.card-header {
+    background: white;
+    border: none;
+}
+
+.custom-body {
+    font-size: 20px;
+}
+
+.btn-modal {
+    margin-left: 40%;
+    margin-right: 40%;
+    color: black;
+    font-weight: 400;
+    background-color: white;
+    font-size: 25px;
+    border: double #bda886;
+    padding: 1%;
+    cursor: pointer;
+    width: 20%;
+}
+
+.btn-modal:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.custom-card-body {
+    border: none;
+}
+
+.add {
+    margin-top: 5%;
+    padding-bottom: 10%;
+}
+
+.title-modal {
+    text-align: center;
+}
+
+#modal-add-expense {
+    font-family: 'Belleza', sans-serif;
+    margin-top: 10%;
+}
+
+.modal-add-expense {
+background: url("/images/background-modal-add-expense.jpg");
+    background-size: cover;
+    background-position-x: center;
+}
+
+.form-label-title {
+    text-align: center;
+    font-size: 22px;
+    display: block;
+}
+
+
+.accordion-title{
+    color: black;
+    text-transform: uppercase;
+    font-weight: 100;
+    font-size: 25px;
+}
+
+.btn-update-expense {
+    color: black;
+    font-weight: 100;
+    background-color: white;
+    font-size: 22px;
+    border: double #bda886;
+    cursor: pointer;
+    margin-top: 36px;
+
+}
+
+.btn-update-expense:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-delete-expense{
+    background: transparent;
+    border: none;
+}
+
+.icon-del{
+    border: double #bda886;
+    padding: 25%;
+}
+
+
+/*------------------------------------------------------MODAL ADD EXPENSE-----------------------------------------------*/
+
+.header-add {
+    border: none;
+}
+
+.title-modal {
+    font-size: 30px;
+}
+
+.btn-new-expense {
+    color: black;
+    font-weight: 100;
+    background-color: white;
+    font-size: 22px;
+    border: double #bda886;
+    cursor: pointer;
+    margin-top: 36px;
+    padding: 2%;
+    display: block;
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.btn-new-expense:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.button-info {
+    text-align: center;
+    font-size: 22px;
+    text-decoration-color: black;
+    text-decoration: underline;
+}
+
+/*<!------------------------------------------ BUDGET INFO ----------------------------------------->*/
+.budget-main {
+    margin-top: 40px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    font-family: 'Belleza', sans-serif;
+    font-size: 25px;
+}
+
+.title-budget {
+    text-align: center;
+}
+
+.image-budget {
+    max-width: 50%;
+    margin-right: 25%;
+    margin-left: 25%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.budget-sum {
+    color: black;
+    text-align: center;
+    font-weight: 300;
+}
+
+/*------------------------------------------MODAL DELETE EXPENSE-------------------------------------------*/
+.x-icon {
+    max-width: 10%;
+}
+
+.modal-delete {
+    max-width: 50%;
+    font-family: 'Belleza', sans-serif;
+}
+
+.modal-body-delete {
+    text-align: center;
+}
+
+.btn-delete-modal {
+    background-color: white;
+    font-size: 25px;
+    margin: 5% 40%;
+    border: double #bda886;
+    padding-left: 4%;
+    padding-right: 4%;
+    cursor: pointer;
+}
+
+.btn-delete-modal:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-main {
+    background-color: white;
+    font-size: 20px;
+    margin: 5% 30%;
+    border: double #bda886;
+    padding-left: 4%;
+    padding-right: 4%;
+    cursor: pointer;
+}
+
+.btn-main:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/*------------------------------------------------MODAL UPDATE BUDGET--------------------------------------------------*/
+.modal-update {
+    font-family: 'Belleza', sans-serif;
+    margin-top: 15%;
+}
+
+.header-update-budget {
+    border: none;
+    margin-top: 5%;
+}
+
+.title-update-budget {
+    font-size: 30px;
+    margin-left: 20%;
+    margin-right: 19%;
+}
+
+.btn-update-budget {
+    color: black;
+    font-weight: 100;
+    background-color: white;
+    font-size: 22px;
+    border: double #bda886;
+    cursor: pointer;
+    margin-top: 36px;
+    padding: 2%;
+    display: block;
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.btn-update-budget:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.button-info {
+    text-align: center;
+    font-size: 22px;
+    text-decoration-color: black;
+    text-decoration: underline;
+}
+
+input:invalid{
+    border-style: double;
+    border-color: #d00000;
+}
+input:valid{
+    border-style: double;
+    border-color: #0f9800;
+}

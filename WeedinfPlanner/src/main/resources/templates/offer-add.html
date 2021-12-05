@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<head>
+    <!------------------------------------------ JS ----------------------------------------->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <!------------------------------------------ BOOTSTRAP CSS ----------------------------------------->
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"-->
+    <!--          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <!------------------------------------------ CUSTOM CSS ----------------------------------------->
+    <link rel="stylesheet" type="text/css" href="/css/offer-add.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+    <!------------------------------------------ GOOGLE FONTS ----------------------------------------->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belleza&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Fleur+De+Leah&display=swap" rel="stylesheet">
+    <!------------------------------------------ GOOGLE ICONS ----------------------------------------->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add offer</title>
+</head>
+<body>
+<!------------------------------------------ NAVIGATION BAR ----------------------------------------->
+<div th:replace="fragments/commons :: navbar">
+    Navbar
+</div>
+
+<div class="row">
+    <div class="col-md-3 container-sidebar">
+        <div class="">
+            <article class="sidebar-widget">
+                <h1 class="sidebar-title">Steps to creating a successful offer</h1>
+                <h4 class="sidebar-h4">Get to know your audience</h4>
+                <hr>
+                <p class="sidebar-p">To make the right offer to your audience, you need to know them as well as you know your best friend. You need to understand what bothers them most; what problems you can solve for them; how they live and who influences them.</p>
+                <h4 class="sidebar-h4">Clarify your offer</h4>
+                <hr>
+                <p class="sidebar-p">Your offer needs to be clear to your audience. What do you want them to buy from you? What is the offer you are giving your audience? How will your offer make a difference in their lives? Is it explained in terms they would understand? Is it clearly stated in all of your marketing material?</p>
+                <h4 class="sidebar-h4">Make your offer easily understandable and accessible to your audience</h4>
+                <hr>
+                <p class="sidebar-p">As a start-up, it’s likely you’ve been living and breathing your business for months or even years. You know it inside out, but can you explain your business and your offer in a way that makes sense to your audience? There’s a phenomenon called the “curse of knowledge”—this happens when we know so much about our particular business or industry that we can forget what our audience needs to know to get started with us. </p>
+                <h4 class="sidebar-h4">Prove your value</h4>
+                <hr>
+                <p class="sidebar-p">It’s pointless to keep repeating how your product is the best and that your business surpasses everyone else in the market. If your product or service is worth it, it will reflect on what your people say in their testimonials. The first thing about offering value is proving how you deliver that value. The more proof you show, the better.</p>
+
+            </article>
+        </div>
+    </div>
+    <div class="col-md-8 container-main">
+        <div class=" border-wrap">
+            <div class="add-container">
+                <h1 class="add-title gold-text">ADD NEW OFFER</h1>
+                <hr>
+                <form class="row" th:action="@{/offers/add}"
+                      th:method="POST"
+                      th:object="${offerAddBindingModel}"
+                      enctype="multipart/form-data">
+                    <div class="row attr-group" id="pictures">
+                        <div class="col-md-6 form-group" th:each="pictureBindingModel, itemStat : *{picturesBind}">
+                            <div class="input-group">
+                                <label for="name" class="form-label gold-text">Picture title</label>
+                                <input th:errorclass="is-invalid"
+                                       th:field="*{picturesBind[__${itemStat.index}__].namePicture}"
+                                       class="form-control input col-md-11 col-11"
+                                       type="text"
+                                       required
+                                       minlength="1" maxlength="20"
+                                       id="name">
+                                <input th:errorclass="is-invalid"
+                                       th:field="*{picturesBind[__${itemStat.index}__].pictureFile}"
+                                       class="form-control input col-md-11 col-11"
+                                       required
+                                       type="file"
+                                       id="picture">
+                                <div th:errors="*{picturesBind[__${itemStat.index}__].namePicture}" class="invalid-feedback"></div>
+                                <div th:errors="*{picturesBind[__${itemStat.index}__].pictureFile}" class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="button-add-picture col-md-6" id="button-add-picture"><span class="material-icons icon-add">add_circle</span>ADD PICTURE
+
+                    </button>
+                    <div class="col-md-6 form-group">
+                        <label for="title" class="form-label gold-text">Title</label>
+                        <input th:field="*{title}"
+                               th:errorclass="is-invalid"
+                               name="title"
+                               type="text"
+                               class="form-control"
+                               required
+                               minlength="5" maxlength="100"
+                               id="title">
+                        <div th:errors="*{title}" class="invalid-feedback">
+                            Title is required.
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="phoneNumber" class="form-label gold-text">Phone number</label>
+                        <input th:field="*{phoneNumber}"
+                               th:errorclass="is-invalid"
+                               name="phoneNumber"
+                               class="form-control"
+                               required
+                               minlength="6" maxlength="50"
+                               id="phoneNumber">
+                        <div th:errors="*{phoneNumber}" class="invalid-feedback">
+                            Phone number is required!
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="about" class="form-label gold-text">About</label>
+                        <textarea th:field="*{about}"
+                                  th:errorclass="is-invalid"
+                                  name="about"
+                                  type="text"
+                                  class="form-control"
+                                  required
+                                  minlength="20" maxlength="1000"
+                                  id="about" cols="30" rows="10"></textarea>
+                        <div th:errors="*{about}" class="invalid-feedback">
+                            About field is required.
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="description" class="form-label gold-text">Description</label>
+                        <textarea th:field="*{description}"
+                                  th:errorclass="is-invalid"
+                                  name="description"
+                                  type="text"
+                                  class="form-control"
+                                  id="description"
+                                  required
+                                  minlength="20" maxlength="1000"
+                                  cols="30" rows="10">
+                        </textarea>
+                        <div th:errors="*{description}" class="invalid-feedback">
+                            Description field is required.
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="minPrice" class="form-label gold-text">Min price</label>
+                        <input th:field="*{minPrice}"
+                               th:errorclass="is-invalid"
+                               name="minPrice" type="number"
+                               class="form-control"
+                               required
+                               min="1"
+                               id="minPrice">
+                        <div th:errors="*{minPrice}" class="invalid-feedback">
+                            Min price field is required.
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="maxPrice" class="form-label gold-text">Max price</label>
+                        <input th:field="*{maxPrice}"
+                               th:errorclass="is-invalid"
+                               name="maxPrice"
+                               type="number"
+                               class="form-control"
+                               required
+                               min="1"
+                               id="maxPrice">
+                        <div th:errors="*{maxPrice}" class="invalid-feedback">
+                            Max price field is required.
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="kmCoverageFromAddress" class="form-label gold-text">Km coverage of your services</label>
+                        <input th:field="*{kmCoverageFromAddress}"
+                               th:errorclass="is-invalid"
+                               name="kmCoverageFromAddress"
+                               class="form-control input"
+                               id="kmCoverageFromAddress"
+                               type="number">
+                        <div th:errors="*{kmCoverageFromAddress}" class="invalid-feedback">
+                            Km coverage field must be a positive number!
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="form-label gold-text">Category</label>
+                        <select th:errorclass="is-invalid" name="category" class="form-control">
+                            <option class="hidden" selected disabled>Please, select category</option>
+                            <option th:each="category: ${categories}"
+                                    th:object="${category}"
+                                    th:text="*{name}"
+                                    th:value="*{name}">
+                            </option>
+                        </select>
+                        <div th:errors="*{category}" class="invalid-feedback">Category is required!.</div>
+                    </div>
+                    <h5 class="gold-text title-incl-attr">What your offer include?</h5>
+                    <div class="row attr-group" id="includedAttributes">
+                        <div class="col-md-6 form-group" th:each="attribute, itemStat : *{includedAttributes}">
+                            <div class="input-group">
+                                <input th:errorclass="is-invalid"
+                                       th:field="*{includedAttributes[__${itemStat.index}__]}"
+                                       class="form-control input col-md-11 col-11" type="text">
+                                <!--                            <button type="button" class="button-delete-attr col-md-1 col-1" id="button-delete-attr">-->
+                                <!--                                <span class="material-icons custom-icon">remove_circle</span></button>-->
+                            </div>
+                            <div th:errors="*{includedAttributes[__${itemStat.index}__]}" class="invalid-feedback"></div>
+                        </div>
+                    </div>
+                    <button type="button" class="button-add-attr col-md-6"
+                            id="button-add-attr">
+                        <span class="material-icons icon-add">add_circle</span>
+                        Add as many attributes as you like!
+                    </button>
+                    <button class="button-add-offer" id="btn-add-offer" type="submit">ADD</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/commons :: footer"></div>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/offer-add.js"></script>
+
+</body>
+</html>

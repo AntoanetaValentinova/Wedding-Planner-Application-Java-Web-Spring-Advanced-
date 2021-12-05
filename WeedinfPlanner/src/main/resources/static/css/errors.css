@@ -1,0 +1,93 @@
+/*-------------------------------404--------------------------*/
+.container-page-404{ padding:40px 0; background:#fff; font-family: 'Belleza', sans-serif;
+}
+
+.container-page-404  img{ width:100%;}
+
+.four-zero-four{
+    background-image: url(/images/404-not-found.gif);
+    height: 400px;
+    background-position: center;
+}
+
+
+.four-zero-four h1{
+    font-size:80px;
+}
+
+.four-zero-four h3{
+    font-size:80px;
+}
+
+.link-404{
+    color: #fff!important;
+    padding: 10px 20px;
+    background: #39ac31;
+    margin: 20px 0;
+    display: inline-block;}
+.contant-box-404{ margin-top:-50px;}
+
+/*-------------------------------403--------------------------*/
+.wrapper {
+    position: relative;
+    max-width: 1298px;
+    height: auto;
+    margin: 2em auto 0 auto;
+    background:white;
+}
+
+.box {
+    max-width: 70%;
+    min-height: 600px;
+    margin: 0 auto;
+    padding: 1em 1em;
+    text-align: center;
+
+}
+
+h1 {
+    margin: 0 0 1rem 0;
+    font-size: 8em;
+    text-shadow: 0 0 6px #8b4d1a;
+}
+
+p {
+    margin-bottom: 0.5em;
+    font-size: 1.75em;
+    color: black;
+}
+
+p:first-of-type {
+    text-shadow: none;
+}
+
+p > a {
+    border-bottom: 1px double #837256;
+    font-style: italic;
+    text-decoration: none;
+    color: black;
+}
+
+p > a:hover { text-shadow: 0 0 3px rgba(213,173,109,1); }
+
+p img { vertical-align: bottom; }
+
+.img-403{
+    width: 200px;
+}
+
+@media screen and (max-width: 600px) {
+    .wrapper {
+        background-size: 300px 114px;
+        background-position: center top 22em;
+    }
+
+    .box {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0;
+        background-size: 320px 185px;
+    }
+
+    p:first-of-type { margin-top: 12em; }
+}

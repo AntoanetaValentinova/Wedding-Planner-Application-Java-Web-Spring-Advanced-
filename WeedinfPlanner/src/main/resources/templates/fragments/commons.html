@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+
+
+    <!------------------------------------------ GOOGLE FONTS ----------------------------------------->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Fleur+De+Leah&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Belleza&display=swap" rel="stylesheet">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Navbar</title>
+</head>
+<body>
+
+<header th:fragment="navbar">
+    <div class="content row justify-content-center">
+        <ul class="exo-menu">
+            <a href="/"><div class="row justify-content-center">
+                <img src="/images/icons/dove.png" alt="dove" class="dove col-md-1 col-1">
+                <div class="brand col-md-4 col-8" >Wedding Planner</div>
+            </div></a>
+            <li sec:authorize="hasRole('ROLE_SUPPLIER')" class="li-msg"><a href="/supplier/messages" class="nav-main-text">
+                <span class="material-icons">email
+                </span>
+            </li>
+            <li sec:authorize="hasRole('ROLE_USER')" class="li-msg"><a href="/user/messages" class="nav-main-text">
+                <span class="material-icons">email
+                </span>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger msg-notification">
+                    99+<span class="visually-hidden"></span>
+                </span>
+            </li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')" class="drop-down col-md-2"><a class="nav-main-text">
+                <div  class="nav-main-text">
+                   <span class="material-icons">admin_panel_settings</span>
+                    ADMIN
+                </div>
+                <ul class="drop-down-ul animated fadeIn">
+                    <li class="drop-down-li"><a href="/admin/manage-users" class="drop-down-a">MANAGE USERS</a></li>
+                    <li class="drop-down-li"><a href="/admin/statistics" class="drop-down-a">STATISTICS</a></li>
+                    <li class="drop-down-li"><a href="/admin/review-offers" class="drop-down-a">APPROVE OFFERS</a></li>
+
+                </ul>
+            </li>
+            <li sec:authorize="hasRole('ROLE_SUPPLIER')" class="drop-down col-md-2"><a href="#" class="nav-main-text">
+                <div  class="nav-main-text">
+                    <span class="material-icons">person</span>
+                    PROFILE
+                </div>
+                <ul class="drop-down-ul animated fadeIn">
+                    <li class="drop-down-li"><a href="/supplier-profile" class="drop-down-a" th:text="${session.loggedUsername}">PERSONAL INFO</a></li>
+                    <li class="drop-down-li"><a href="/supplier-profile/my-offers" class="drop-down-a">MY OFFERS</a></li>
+                </ul>
+            </li>
+            </li>
+            <li sec:authorize="hasRole('ROLE_USER')" class="drop-down col-md-2"><a href="#" class="nav-main-text">
+                <div  class="nav-main-text">
+                    <span class="material-icons">person</span>
+                    PROFILE
+                </div>
+                <ul class="drop-down-ul animated fadeIn">
+                    <li class="drop-down-li"><a href="/user-profile" class="drop-down-a">PERSONAL INFO</a></li>
+                    <li class="drop-down-li"><a href="/wedding" class="drop-down-a">MY WEDDING</a></li>
+                </ul>
+            </li>
+            <li sec:authorize="hasRole('ROLE_USER')" class="drop-down col-md-3"><a  class="nav-main-text">PLANNING TOOLS</a>
+                <ul class="drop-down-ul animated fadeIn">
+                    <li class="drop-down-li nav-main-text"><a href="/wedding-checklist" class="drop-down-a">CHECKLIST</a></li>
+                    <li class="drop-down-li"><a href="/wedding-guests" class="drop-down-a">GUESTS</a></li>
+                    <li class="drop-down-li"><a href="/wedding-budget" class="drop-down-a">BUDGET</a></li>
+                </ul>
+                <!--//End drop down-->
+            <li class="images-drop-down col-md-2"><a href="/offers" class="nav-main-text"><i class="fa fa-photo"></i>
+                SUPPLIERS</a>
+                <div class="categories animated fadeIn">
+                    <div class="col category-card">
+                        <a class="link-category" th:href="@{/offers/category-venues}">
+                            <h4 class="gold-text">VENUE</h4>
+                            <hr>
+                            <img class="img-link-navbar" src="/images/icons/hall.png">
+                        </a>
+                    </div>
+                    <div class="col category-card">
+                        <a class="link-category" th:href="@{/offers/category-photographers}">
+                            <h4 class="gold-text">PHOTO</h4>
+                            <hr>
+                            <img class="img-link-navbar" src="/images/icons/camera.png">
+                        </a>
+                    </div>
+                    <div class="col category-card">
+                        <a class="link-category" th:href="@{/offers/category-music}">
+                            <h4 class="gold-text">MUSIC</h4>
+                            <hr>
+                            <img class="img-link-navbar" src="/images/icons/music.png">
+                        </a>
+                    </div>
+                    <div class="col category-card">
+                        <a class="link-category" th:href="@{/offers/category-flowers}">
+                            <h4 class="gold-text">FLOWER</h4>
+                            <hr>
+                            <img class="img-link-navbar" src="/images/icons/bouquet.png">
+                        </a>
+                    </div>
+                    <div class="col category-card">
+                        <a class="link-category" th:href="@{/offers/category-cakes}">
+                            <h4 class="gold-text">CAKE</h4>
+                            <hr>
+                            <img class="img-link-navbar" src="/images/icons/wedding-cake.png">
+                        </a>
+                    </div>
+                    <div class="col category-card">
+                        <a class="link-category" th:href="@{/offers/category-catering}">
+                            <h4 class="gold-text">CATERING</h4>
+                            <hr>
+                            <img class="img-link-navbar" src="/images/icons/catering.png">
+                        </a>
+                    </div>
+                    <div class="col category-card">
+                        <a class="link-category" th:href="@{/offers/category-planning}">
+                            <h4 class="gold-text">PLANNING</h4>
+                            <hr>
+                            <img class="img-link-navbar" src="/images/icons/wedding-planning.png">
+                        </a>
+                    </div>
+                    <div class="col category-card">
+                        <a class="link-category" th:href="@{/offers/category-dresses}">
+                            <h4 class="gold-text">DRESS</h4>
+                            <hr>
+                            <img class="img-link-navbar" src="/images/icons/wedding-dress.png">
+                        </a>
+                    </div>
+                    <div class="col category-card">
+                        <a class="link-category" th:href="@{/offers/category-decor}">
+                            <h4 class="gold-text">DECOR</h4>
+                            <hr>
+                            <img class="img-link-navbar" src="/images/icons/wedding-arch.png">
+                        </a>
+                    </div>
+                    <div class="col category-card">
+                        <a class="link-category" th:href="@{/offers/category-invitations}">
+                            <h4 class="gold-text">INVITATION</h4>
+                            <hr>
+                            <img class="img-link-navbar" src="/images/icons/card.png">
+                        </a>
+                    </div>
+                    <div class="col category-card">
+                        <a class="link-category" th:href="@{/offers/category-jewelry}">
+                            <h4 class="gold-text">JEWELRY</h4>
+                            <hr>
+                            <img class="img-link-navbar" src="/images/icons/wedding-ring.png">
+                        </a>
+                    </div>
+                    <div class="col category-card">
+                        <a class="link-category" th:href="@{/offers/category-travel}">
+                            <h4 class="gold-text">TRAVEL</h4>
+                            <hr>
+                            <img class="img-link-navbar" src="/images/icons/honeymoon.png">
+                        </a>
+                    </div>
+                </div>
+<!--            <li sec:authorize="hasRole('ROLE_SUPPLIER')" class="drop-down col-md-4"></li>-->
+<!--            <li sec:authorize="hasRole('ROLE_USER')" class="drop-down col-md-1"></li>-->
+<!--            <li sec:authorize="!isAuthenticated()" class="col-md-5 right-li"></li>-->
+            <li sec:authorize="!isAuthenticated()" class="col-md-2 right-li">
+                <a href="/login" class="nav-main-text">
+                    <span class="material-icons">login</span>
+                    Login
+                </a>
+            </li>
+            <li sec:authorize="!isAuthenticated()" class="col-md-2">
+                <a href="/register" class="nav-main-text">
+                    <span class="material-icons">app_registration</span>
+                   Register
+                </a>
+            </li>
+            <li sec:authorize="isAuthenticated()" class="right-li-logout col-md-1">
+                <form th:action="@{/logout}" th:method="POST">
+                    <button type="submit" class="button-logout" data-toggle="tooltip" data-placement="bottom"
+                            title="Logout"><span class="material-icons">logout</span></button>
+                </form>
+            </li>
+            <a class="toggle-menu visible-xs-block col-md-1">|||</a>
+        </ul>
+    </div>
+</header>
+
+<footer th:fragment="footer" class="footer">
+    <div> &copy; Antoaneta Ivanova</div>
+</footer>
+</body>
+</html>

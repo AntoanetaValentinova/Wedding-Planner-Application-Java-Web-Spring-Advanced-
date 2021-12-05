@@ -1,0 +1,425 @@
+body{
+    font-family: 'Belleza', sans-serif;
+}
+
+.container-wedding {
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background: white;
+    width: 90%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background: url("/images/background-10.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 1% 0%;
+}
+
+.date{
+    font-size: 70px;
+    text-align: center;
+    display: block;
+}
+
+.btn-add-date{
+    background: #b8935ad4;
+    padding: 2%10%;
+    margin: 2%;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.overlay-main {
+    background-color: rgb(255 255 255 / 54%);
+    padding: 5% 2%;
+    margin: 0% 20%;
+    font-size: 50px;
+    color: white;
+    text-align: center;
+    transition: transform .2s;
+}
+
+.main-img {
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    display: block;
+}
+
+.image-container {
+    height: 300px;
+    width: 350px;
+    padding-left: 5%;
+}
+
+.main-title {
+    font-size: 40px;
+    text-align: center;
+    display: block;
+    color: black;
+    font-weight: 900;
+    transition: transform 0.2s;
+}
+
+.main-title:hover{
+    transform:scale(1.1);
+}
+
+
+
+
+/*-----------------------------------------------------OVERVIEW GUESTS----------------------------------------------------------*/
+.guests-container {
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 2%;
+    background: white;
+    width: 90%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.image-icon {
+    max-width: 50%;
+    margin-top: 7%;
+}
+
+
+.card-guests {
+    text-align: center;
+}
+
+/*<!------------------------------------------ BUDGET INFO ----------------------------------------->*/
+.row-tools{
+    margin: 2% 5%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.budget-main {
+    background: white;
+    font-family: 'Belleza', sans-serif;
+    font-size: 25px;
+}
+
+.title-budget {
+    text-align: center;
+    margin-top: 20%;
+}
+
+.image-budget {
+    max-width: 50%;
+    margin-right: 25%;
+    margin-left: 25%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.budget-sum {
+    color: black;
+    text-align: center;
+    font-weight: 300;
+}
+
+.pic-budget {
+    background: url("/images/groom-s-bride-s-weddings-rings-are-bridal-veil.jpg");
+    background-size: cover;
+}
+
+.info{
+    padding: 10% 0%;
+    text-align: center;
+}
+
+
+/*---------------------------------------------------CHECKLIST PROGRESS BAR----------------------------------------------*/
+.progress-container {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    font-family: 'Belleza', sans-serif;
+    background-size: cover;
+    padding: 10% 5%;
+}
+
+.info {
+    padding: 10% 2%;
+    text-align: center;
+}
+
+.custom-progress {
+    height: 40px;
+}
+
+.override-progress-bar{
+    background-color: #caa365;
+}
+
+.pic-checklist {
+    background: url("/images/background-8.jpg");
+    background-size: cover;
+}
+
+
+.overlay{
+    background-color: rgba(255, 255, 255, 0.56);
+    padding: 9%;
+    margin: 2%;
+    font-size: 50px;
+    color: black;
+    text-align: center;
+    transition: transform .2s;
+}
+
+.overlay:hover{
+    transform:scale(1.1);
+}
+
+.col-custom {
+    padding: 0;
+}
+
+/*---------------------------------------FAVOURITE OFFERS------------------------------*/
+.favourite-container{
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background: rgb(255, 255, 255);
+    width: 90%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    /*background: url("/images/background-7.jpg");*/
+    background-size: cover;
+}
+
+.title-favourite {
+    text-align: center;
+    font-size: 30px;
+    padding-top: 1%;
+}
+
+.offer-grid {
+    font-family: 'Belleza', sans-serif;
+    text-align: center;
+    display: inline-block;
+    margin: 1%;
+    padding: 0%;
+    transition: all 0.3s ease 0s;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes stretch {
+    0% {
+        transform: scale(.2);
+        border-radius: 100%;
+    }
+    100% {
+        transform: scale(1.0);
+    }
+}
+
+.offer-grid {
+    animation-name: stretch;
+    animation-duration: 600ms;
+    animation-timing-function: ease-out;
+    animation-delay: 0s;
+    animation-direction: alternate;
+    animation-fill-mode: none;
+    animation-play-state: running;
+    animation-iteration-count: 1;
+}
+
+
+
+.offer-image {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 10vw;
+    object-fit: cover;
+}
+
+.offer-image a.image {
+    display: block;
+}
+
+.offer-image img {
+    width: 100%;
+    height: auto;
+}
+
+.offer-links {
+    width: 50px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    transition: all 0.4s ease;
+}
+
+.offer-grid:hover .offer-links {
+    opacity: 1;
+}
+
+.offer-links li {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transform: translateX(-50px);
+    filter: blur(5px);
+    transition: all 0.4s ease 0s;
+}
+
+.offer-links li:nth-child(even) {
+    transform: translateX(50px);
+}
+
+.offer-grid:hover .offer-links li {
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+.offer-links li a,form,button {
+    color:  rgba(213,173,109,1) ;
+    background: white;
+    font-size: 16px;
+    line-height: 50px;
+    width: 50px;
+    height: 50px;
+    display: block;
+    transition: all 0.3s ease 0s;
+}
+
+.offer-grid .offer-links li a:hover {
+    color: #fff;
+    background:  rgba(213,173,109,1) ;
+}
+
+.offer-grid .offer-content {
+    background-color: white;
+    font-family: 'Belleza', sans-serif;
+    padding: 15px 10px 3px;
+}
+
+.offer-title {
+    font-size: 18px;
+    font-weight: 400;
+    height: 55px;
+    color: black;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+}
+
+.offer-title:hover {
+    background: -webkit-linear-gradient(top, rgba(213,173,109,1) 0%, rgba(213,173,109,1) 26%, rgba(226,186,120,1) 35%, rgba(163,126,67,1) 45%, rgba(145,112,59,1) 61%, rgba(213,173,109,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    position: relative;
+}
+
+.offer-title a {
+    color: #222;
+    transition: all 0.3s ease 0s;
+}
+
+.offer-title a:hover {
+    background: -webkit-linear-gradient(top, rgba(213,173,109,1) 0%, rgba(213,173,109,1) 26%, rgba(226,186,120,1) 35%, rgba(163,126,67,1) 45%, rgba(145,112,59,1) 61%, rgba(213,173,109,1) 100%);
+}
+
+
+.offer-grid .price-text {
+    color: #222;;
+    font-size: 17px;
+    font-weight: 300;
+    text-align: right;
+    width: calc(100% - 55px);
+    display: inline-block;
+}
+
+.offer-grid .price {
+    font-size: 17px;
+    font-weight: 700;
+    text-align: right;
+    width: calc(100% - 55px);
+    display: inline-block;
+}
+
+.offer-grid .price span {
+    color: #999;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: line-through;
+}
+
+.container-empty{
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+.container-empty-info{
+    color: black;
+    font-size: 24px;
+}
+
+.container-empty-link{
+    color: black;
+    font-size: 24px;
+    text-decoration: underline;
+    font-style: italic;
+}
+
+@media screen and (max-width: 990px) {
+    .offer-grid {
+        margin: 0 0 30px;
+        width: 80%;
+    }
+
+    .offer-image{
+        height: 50vw;
+    }
+
+    .title-guest-card{
+        font-size: 22px;
+        margin-top:10%;
+    }
+}
+
+/*---------------------------------------------MODAL WEDDING DATE--------------------------------------------*/
+.modal-custom{
+    margin-top: 20%;
+}
+
+.btn-add-date-modal{
+    width: 30%;
+    margin-left: 35%;
+    display: block;
+    text-align: center;
+    margin-right: 35%;
+    background: white;
+    border: #d1b17b double;
+}
+
+.mad-form-group{
+    text-align: center;
+    font-size: 23px;
+}
+
+.form-body{
+    width: 80%;
+    height: auto;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+input:invalid{
+    border-style: double;
+    border-color: #d00000;
+}
+input:valid{
+    border-style: double;
+    border-color: #0f9800;
+}

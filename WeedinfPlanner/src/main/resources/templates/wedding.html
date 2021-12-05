@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<head>
+    <!------------------------------------------ JS ----------------------------------------->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script th:src="@{/assets/jquery-countdown/jquery.countdown.min.js}"></script>
+    <!------------------------------------------ BOOTSTRAP CSS ----------------------------------------->
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"-->
+    <!--          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <!------------------------------------------ CUSTOM CSS ----------------------------------------->
+    <link rel="stylesheet" type="text/css" href="/css/wedding.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+
+    <!------------------------------------------ GOOGLE FONTS ----------------------------------------->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Fleur+De+Leah&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Belleza&display=swap" rel="stylesheet">
+    <!------------------------------------------ GOOGLE ICONS ----------------------------------------->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My wedding</title>
+</head>
+<body>
+<!------------------------------------------ NAVIGATION BAR ----------------------------------------->
+<div th:replace="fragments/commons :: navbar">
+    Navbar
+</div>
+
+<div class="container-wedding animated-border ">
+    <div class="overlay-main">
+        <h1 class="row main-title"> WEDDING DATE</h1>
+        <h1 class="row date gold-text" th:text="${weddingDate}"></h1>
+        <buttton class="btn-add-date" data-toggle="modal" data-target="#modal-add-wedding-date" th:text="*{weddingDate==null} ? 'ADD WEDDING DATE':'UPDATE WEDDING DATE'">ADD WEDDING DATE</buttton>
+    </div>
+</div>
+
+<div class="favourite-container">
+    <h1 class="gold-text title-favourite">YOUR FAVOURITE OFFERS</h1>
+    <hr>
+    <div th:if="${favouriteOffers.isEmpty()}" class="container-empty">
+        <h2 class="container-empty-info">Hmmm.. nothing to show here.</h2>
+        <a class="container-empty-link" href="/offers">Check out our suppliers offers</a>
+    </div>
+    <div class="row justify-content-center">
+        <div class="offer-grid animated-border col-md-2" th:each="offer : ${favouriteOffers}" th:object="${offer}">
+            <div class="offer-image">
+                <a th:href="@{/offers/{id}(id=*{id})}" th:each="picture,itemStat : *{pictures}" class="image">
+                    <section>
+                        <div class="carousel-item"
+                             th:classappend="${itemStat.index} ==0? 'active' : '' "
+                             th:id="${itemStat.index}">
+                            <div class="view">
+                                <img class="d-block w-100"
+                                     th:src="*{pictures[__${itemStat.index}__].url}"
+                                     alt="slide">
+                            </div>
+                        </div>
+                    </section>
+                </a>
+                <ul class="offer-links">
+                    <li>
+                        <a th:href="@{/offers/{id}(id=*{id})}">
+                            <i class="material-icons">visibility</i>
+                        </a>
+                    </li>
+                    <li>
+                        <form  th:action="@{/wedding/remove-favourite(offer=*{id})}" th:method="PATCH">
+                            <button  type="submit">
+                                <i class="material-icons">heart_broken</i>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class="offer-content">
+                <a class="link-title" th:href="@{/offers/{id}(id=*{id})}">
+                    <h3 class="offer-title" th:text="*{title}"><a th:href="@{/offers/{id}(id=*{id})}">Offer
+                    </a></h3>
+                    <hr class="">
+                    <h6 class="price-text">Price range:</h6>
+                    <div class="price gold-text" th:text="*{minPrice} + ' - ' + *{maxPrice}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="favourite-container">
+    <h1 class="gold-text title-favourite">YOUR HIRED SUPPLIERS</h1>
+    <hr>
+    <div th:if="${allHired.isEmpty()}" class="container-empty">
+        <h2 class="container-empty-info">Hmmm.. nothing to show here.</h2>
+        <a class="container-empty-link" href="/offers">Check out our suppliers offers</a>
+    </div>
+    <div class="row justify-content-center">
+        <div class="offer-grid animated-border col-md-2" th:each="offer : ${allHired}" th:object="${offer}">
+            <div class="offer-image">
+                <a th:href="@{/offers/{id}(id=*{id})}" th:each="picture,itemStat : *{pictures}" class="image">
+                    <section>
+                        <div class="carousel-item"
+                             th:classappend="${itemStat.index} ==0? 'active' : '' "
+                             th:id="${itemStat.index}">
+                            <div class="view">
+                                <img class="d-block w-100"
+                                     th:src="*{pictures[__${itemStat.index}__].url}"
+                                     alt="slide">
+                            </div>
+                        </div>
+                    </section>
+                </a>
+                <ul class="offer-links">
+                    <li>
+                        <a th:href="@{/offers/{id}(id=*{id})}">
+                            <i class="material-icons">visibility</i>
+                        </a>
+                    </li>
+                    <li>
+                        <form th:action="@{/wedding/remove-hired(offer=*{id})}"
+                              th:method="PATCH">
+                            <button class="col button-favourite" type="submit" >
+                                <i class="material-icons">remove_circle_outline</i>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class="offer-content">
+                <a class="link-title" th:href="@{/offers/{id}(id=*{id})}">
+                    <h3 class="offer-title" th:text="*{title}"><a th:href="@{/offers/{id}(id=*{id})}">Offer
+                    </a></h3>
+                    <hr class="">
+                    <h6 class="price-text">Price range:</h6>
+                    <div class="price gold-text" th:text="*{minPrice} + ' - ' + *{maxPrice}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="/wedding-guests">
+    <div class="animated-border guests-container">
+        <div class="row justify-content-center">
+            <div class="col-md-4 col-4 card-guests">
+                <div class="row">
+                    <div class="col-md-6">
+                        <image class="image-icon" src="/images/icons/attending.png"></image>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="gold-text title-guest-card">GUESTS</h3>
+                        <h3 th:text="${allAttending}"></h3>
+                        <h6>people of your guest list accepted your invitation</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-4 card-guests">
+                <div class="row">
+                    <div class="col-md-6">
+                        <image class="image-icon" src="/images/icons/pending.png"></image>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="gold-text title-guest-card">PENDING</h3>
+                        <h3 th:text="${allPending}"></h3>
+                        <h6>people are not respond yet</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-4 card-guests">
+                <div class="row">
+                    <div class="col-md-6">
+                        <image class="image-icon" src="/images/icons/declined.png"></image>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="gold-text title-guest-card">DECLINED</h3>
+                        <h3 th:text="${allDeclined}"></h3>
+                        <h6>declined</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</a>
+
+<div class="row row-tools">
+    <div class="budget-main col-md-3 animated-border" th:object="${budget}">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-6">
+                <h2 class="title-budget gold-text">
+                    BUDGET
+                </h2>
+                <hr>
+                <img class="image-budget" src="/images/icons/budget.png" alt="">
+                <h2 class="budget-sum gold-text" th:text="*{initialBudget}"></h2>
+            </div>
+            <div class="col-md-6 col-6">
+                <h2 class="title-budget gold-text">
+                    LEFT
+                </h2>
+                <hr>
+                <img class="image-budget" src="/images/icons/money.png" alt="">
+                <h2 class="budget-sum gold-text" th:text="*{currentBudget}"></h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9 pic-budget">
+        <a href="/wedding-budget">
+            <div class="overlay"> MANAGE YOU BUDGET</div>
+        </a>
+    </div>
+</div>
+
+<div class="row row-tools">
+    <div class="col-md-9 pic-checklist">
+        <a href="/wedding-checklist">
+            <div class="overlay">CHECK YOUR TASKS</div>
+        </a>
+    </div>
+    <div class="col-md-3 col-custom animated-border">
+        <div class="progress-container"
+             th:with="result=${#numbers.formatDecimal((1.0 * countCompleted / countAll)*100, 1, 'POINT', 2, 'COMMA')}">
+            <div class="progress-overlay">
+                <h4 class="info" th:text="${countCompleted}+' of '+${countAll}+' tasks are completed'"></h4>
+                <div class="progress custom-progress">
+                    <div
+                            class="progress-bar override-progress-bar"
+                            role="progressbar"
+                            th:style="'width:'+ ${result}"
+                            th:aria-valuenow="${result}"
+                            th:text="|${result} %|"
+                            aria-valuemin="0"
+                            aria-valuemax="100">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--_______________________________MODAL ADD DATE_________________________________________________-->
+<div class="modal fade right modal-update"  id="modal-add-wedding-date" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-danger modal-custom" role="document">
+        <div class="modal-content modal-date-content">
+            <div class="modal-header header-update-budget">
+                <h4 class="title-modal gold-text title-update-budget">ADD YOUR WEDDING DATE</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+            <!------------------------------------------ FORM MODAL ----------------------------------------->
+            <form class="modal-body form-body" th:action="@{/wedding/add-date}"
+                  th:method="POST" th:object="${weddingDateBindingModel}">
+                <script th:inline="javascript" th:if="${addDateHasErrors}">$("#modal-add-wedding-date").modal("show");</script>
+                <div class="col-md-12 form-group mad-form-group" data-date-format="yyyy-MM-dd">
+                    <label for="dateRegister" class="form-label">Date of the weeding</label>
+                    <input th:field="*{date}"
+                           th:errorclass="is-invalid"
+                           th:value="*{date}" name="date"
+                           type="date"
+                           required
+                           class="form-control datepicker"
+                           id="dateRegister"
+                           placeholder="2021-10-10">
+                    <div th:errors="*{date}" class="invalid-feedback"></div>
+                </div>
+                <button type="submit" class="btn-add-date-modal">SUBMIT</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/commons :: footer"></div>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

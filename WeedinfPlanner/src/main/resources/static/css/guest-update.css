@@ -1,0 +1,47 @@
+.container-update-guest {
+    margin-top: 5%;
+    background: white;
+    padding: 3%;
+    font-family: 'Belleza', sans-serif;
+}
+
+input:invalid{
+    border-style: double;
+    border-color: #d00000;
+}
+input:valid{
+    border-style: double;
+    border-color: #0f9800;
+}
+
+.title {
+    text-align: center;
+}
+
+.label-update{
+    font-size: 24px;
+}
+
+.checkbox-update{
+    font-size: 24px;
+    display: block;
+}
+
+.form-group-update{
+    text-align: center;
+}
+
+.btn-add-guest {
+    background-color: white;
+    font-size: 25px;
+    max-width: 30%;
+    margin: 5% 33%;
+    border: double #bda886;
+    padding-left: 4%;
+    padding-right: 4%;
+    cursor: pointer;
+}
+
+.btn-update-guest:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}

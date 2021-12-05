@@ -1,0 +1,275 @@
+/*Background with parallax effect*/
+.admin {
+    background-image: url("/images/background-11.jpg");
+    font-family: 'Belleza', sans-serif;
+    background-size: cover;
+    background-position: right;
+}
+/*---------------------------------------MANAGE USERS-----------------------------------*/
+
+.users-container {
+    background: white;
+    margin-top: 2%;
+    padding: 2%;
+
+}
+
+.user {
+    border-bottom: double;
+    border-color: #dcb473;
+}
+
+.supplier {
+    border-bottom: double;
+    border-color: #dcb473;
+}
+
+.title {
+    color: black;
+    text-align: center;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.small-btn {
+    background-color: white;
+    font-size: 15px;
+    border: double #bda886;
+    cursor: pointer;
+    padding: 0% 10%;
+    width: 100%;
+}
+
+.small-btn:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.small-btn-remove {
+    background-color: rgba(196, 0, 0, 0.69);
+    font-size: 15px;
+    width: 100%;
+    border: double #bda886;
+    cursor: pointer;
+    color: white;
+}
+
+.small-btn-remove:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.prop{
+    color: black;
+    overflow: hidden;
+}
+
+/*----------------------------------------STATISTIC-------------------------------------------*/
+.container-statistic {
+    background: white;
+    margin: 2% 10%;
+}
+
+.title-container{
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.image-requests {
+    width: 100%;
+}
+
+.container-requests{
+    padding: 2% 10%;
+    border: double #bda886;
+}
+
+.text-request{
+    text-align: center;
+    font-size: 30px;
+}
+
+.container-views{
+    padding: 2% 10%;
+    border: double #bda886;
+}
+
+/*--------------------------------------------APPROVE OFFERS----------------------------------------------------------*/
+.container-offers{
+    background: white;
+    margin: 2% 5%;
+}
+.offer-grid {
+    font-family: 'Belleza', sans-serif;
+    text-align: center;
+    display: inline-block;
+    margin: 3%;
+    padding: 1%;
+    transition: all 0.3s ease 0s;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes stretch {
+    0% {
+        transform: scale(.2);
+        border-radius: 100%;
+    }
+    100% {
+        transform: scale(1.0);
+    }
+}
+
+.offer-grid {
+    animation-name: stretch;
+    animation-duration: 600ms;
+    animation-timing-function: ease-out;
+    animation-delay: 0s;
+    animation-direction: alternate;
+    animation-fill-mode: none;
+    animation-play-state: running;
+    animation-iteration-count: 1;
+}
+
+
+
+.offer-image {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 11vw;
+    object-fit: cover;
+}
+
+.offer-image a.image {
+    display: block;
+}
+
+.offer-image img {
+    width: 100%;
+    height: auto;
+}
+
+.offer-links {
+    width: 50px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    transition: all 0.4s ease;
+}
+
+.offer-grid:hover .offer-links {
+    opacity: 1;
+}
+
+.offer-links li {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transform: translateX(-50px);
+    filter: blur(5px);
+    transition: all 0.4s ease 0s;
+}
+
+.offer-links li:nth-child(even) {
+    transform: translateX(50px);
+}
+
+.offer-grid:hover .offer-links li {
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+.offer-links li a,button {
+    color:  rgba(213,173,109,1) ;
+    background: white;
+    font-size: 16px;
+    line-height: 50px;
+    width: 50px;
+    height: 50px;
+    display: block;
+    transition: all 0.3s ease 0s;
+}
+
+.offer-grid .offer-links li a:hover {
+    color: #fff;
+    background:  rgba(213,173,109,1) ;
+}
+
+.offer-grid .offer-content {
+    background-color: white;
+    font-family: 'Belleza', sans-serif;
+    padding: 15px 10px 3px;
+}
+
+.offer-title {
+    font-size: 21px;
+    font-weight: 400;
+    height: 55px;
+    color: black;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+}
+
+.offer-title:hover {
+    background: -webkit-linear-gradient(top, rgba(213,173,109,1) 0%, rgba(213,173,109,1) 26%, rgba(226,186,120,1) 35%, rgba(163,126,67,1) 45%, rgba(145,112,59,1) 61%, rgba(213,173,109,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    position: relative;
+}
+
+.offer-title a {
+    color: #222;
+    transition: all 0.3s ease 0s;
+}
+
+.offer-title a:hover {
+    background: -webkit-linear-gradient(top, rgba(213,173,109,1) 0%, rgba(213,173,109,1) 26%, rgba(226,186,120,1) 35%, rgba(163,126,67,1) 45%, rgba(145,112,59,1) 61%, rgba(213,173,109,1) 100%);
+}
+
+.btn-green {
+    margin: 2%;
+    border: double #49ba00;
+    color: #49ba00;
+    width: 100%;
+}
+
+.btn-red {
+    margin: 2%;
+    border: double #ba0000;
+    color: #ba0000;
+    width: 100%;
+}
+
+.title-appr{
+    text-align: center;
+    padding-top:3% ;
+}
+
+.p-wrap{
+    background: url("/images/employee.jpg");
+    background-size: cover;
+    width: 100%;
+    height: 500px;
+    padding-top: 10%;
+}
+
+.p-ready{
+    text-align: center;
+    padding: 5%;
+    margin: 0% 5%;
+    font-size: 30px;
+    font-family: 'Belleza', sans-serif;
+    background: rgba(255, 255, 255, 0.71);
+}
+
+
+@media screen and (max-width: 990px) {
+    .offer-grid {
+        margin: 0 0 30px;
+    }
+}

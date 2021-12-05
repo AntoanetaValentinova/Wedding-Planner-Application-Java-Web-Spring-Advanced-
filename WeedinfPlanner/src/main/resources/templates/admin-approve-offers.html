@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<head>
+    <!------------------------------------------ JS ----------------------------------------->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <!------------------------------------------ BOOTSTRAP CSS ----------------------------------------->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <!------------------------------------------ CUSTOM CSS ----------------------------------------->
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/admin.css"/>
+    <!------------------------------------------ GOOGLE FONTS ----------------------------------------->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belleza&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Fleur+De+Leah&display=swap" rel="stylesheet">
+    <!------------------------------------------ GOOGLE ICONS ----------------------------------------->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Approve offers</title>
+</head>
+<body>
+<!------------------------------------------ NAVIGATION BAR ----------------------------------------->
+<header th:replace="fragments/commons :: navbar">
+    Navbar
+</header>
+<div class="container-offers">
+    <h1 class="gold-text title-appr">Offers for review</h1>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="p-wrap" th:if="${pendingOffers.size()==0}">
+                <p class="p-ready" >Seems you are ready with all of your work here. There is no offers for review.</p>
+            </div>
+            <div class="offer-grid animated-border col-sm-3" th:each="offer : ${pendingOffers}" th:object="${offer}">
+                <div class="offer-image">
+                    <a th:href="@{/offers/{id}(id=*{id})}" th:each="picture,itemStat : *{pictures}" class="image">
+                        <section>
+                            <div class="carousel-item"
+                                 th:classappend="${itemStat.index} ==0? 'active' : '' "
+                                 th:id="${itemStat.index}">
+                                <div class="view">
+                                    <img class="d-block w-100"
+                                         th:src="*{pictures[__${itemStat.index}__].url}"
+                                         alt="slide">
+                                </div>
+                            </div>
+                        </section>
+                    </a>
+                    <ul class="offer-links">
+                        <li>
+                            <a th:href="@{/offers/{id}(id=*{id})}">
+                                <i class="material-icons">visibility</i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="offer-content">
+                    <a class="link-title" th:href="@{/offers/{id}(id=*{id})}">
+                        <h3 class="offer-title" th:text="*{title}"><a th:href="@{/offers/{id}(id=*{id})}">Offer
+                        </a></h3>
+                        <hr class="">
+                        <div class="row justify-content-center">
+                            <form class="col-md-5" th:action="@{/admin/review-offers/approve/{id}(id=*{id})}" th:method="PATCH">
+                                <button class=" btn-green"> <span class="material-icons">done_outline</span>Approve</button>
+                            </form>
+                            <form  class="col-md-5" th:action="@{/admin/review-offers/reject/{id}(id=*{id})}" th:method="PATCH">
+                                <button class=" btn-red"> <span class="material-icons">close</span>Reject</button>
+                            </form>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/commons :: footer"></div>
+<script src="/js/main.js"></script>
+</body>
+</html>

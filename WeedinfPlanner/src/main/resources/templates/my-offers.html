@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<head>
+    <!------------------------------------------ JS ----------------------------------------->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <!------------------------------------------ BOOTSTRAP CSS ----------------------------------------->
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"-->
+    <!--          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <!------------------------------------------ CUSTOM CSS ----------------------------------------->
+    <link rel="stylesheet" type="text/css" href="/css/my-offers.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+
+    <!------------------------------------------ GOOGLE FONTS ----------------------------------------->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Fleur+De+Leah&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Belleza&display=swap" rel="stylesheet">
+    <!------------------------------------------ GOOGLE ICONS ----------------------------------------->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My offers</title>
+</head>
+<body>
+<!------------------------------------------ NAVIGATION BAR ----------------------------------------->
+<div th:replace="fragments/commons :: navbar">
+    Navbar
+</div>
+
+
+
+<div class="my-offers">
+    <h2 class="row gold-text justify-content-center title-my-offers" th:text="|${currentUserCompanyName} offers|"></h2>
+    <hr>
+    <div th:if="${supplierOffers.isEmpty()}" class="my-offers-empty">
+        <h3 class="my-offers-empty-info">You don`t have any offers yet!</h3>
+    </div>
+    <div class="row justify-content-center">
+        <a sec:authorize="hasRole('ROLE_SUPPLIER')" href="/offers/add" class="button-add-offer gold-text">
+            ADD NEW OFFER
+        </a>
+    </div>
+    <div class="row justify-content-center" >
+        <div th:each="offer : ${supplierOffers}" th:object="${offer}" class="offer-grid animated-border col-md-4">
+<!--            TODO: pictures-->
+            <div class="offer-image">
+                <a th:href="@{/offers/{id}(id=*{id})}" th:each="picture,itemStat : *{pictures}" class="image">
+                    <section>
+                        <div class="carousel-item"
+                             th:classappend="${itemStat.index} ==0? 'active' : '' "
+                             th:id="${itemStat.index}">
+                            <div class="view">
+                                <img class="d-block w-100"
+                                     th:src="*{pictures[__${itemStat.index}__].url}"
+                                     alt="slide">
+                            </div>
+                        </div>
+                    </section>
+                </a>
+                <ul class="offer-links">
+                    <li>
+                        <a th:href="@{/offers/{id}(id=*{id})}">
+                            <i class="material-icons">visibility</i>
+                        </a>
+                    </li>
+                    <li sec:authorize="hasRole('ROLE_SUPPLIER')" >
+                        <a th:href="@{/offers/{id}/update(id=*{id})}">
+                            <i class="material-icons">edit</i>
+                        </a>
+                    </li>
+                    <li sec:authorize="hasRole('ROLE_SUPPLIER')" >
+                        <form th:action="@{/offers/{id}/delete(id=*{id})}" th:method="DELETE">
+                            <button type="submit" class="btn-small">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class="offer-content">
+                <a class="link-title" th:href="@{/offers/{id}(id=*{id})}">
+                    <h3 class="offer-title" th:text="*{title}">Offer</h3>
+                </a>
+                <hr class="">
+                <h6 class="price-text">Price range:</h6>
+                <div class="price gold-text" th:text="|*{minPrice}-*{maxPrice}|">7000-8000</div>
+                <div th:if="*{#strings.equals(status.name(), 'APPROVED')}" class="approved-icon-holder row">
+                    <span class="material-icons icon col-md-2">done</span>
+                    <p class="col-md-10">Your offer is approved by our team and every user can see it. We wish you many happy clients!</p>
+                </div>
+                <div th:if="*{#strings.equals(status.name(), 'PENDING')}" class="pending-icon-holder row">
+                    <span class="material-icons icon col-md-2">pending</span>
+                    <p class="col-md-10">Your offer is waiting for review by our team.</p>
+                </div>
+                <div th:if="*{#strings.equals(status.name(), 'DECLINED')}" class="rejected-icon-holder row">
+                    <span class="material-icons icon col-md-2">close</span>
+                    <p class="col-md-10" th:text="|You have 1 month from the date you created this offer - *{created} to edit it and our team to review it again. After that it will be deleted.|"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/commons :: footer"></div>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
